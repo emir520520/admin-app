@@ -1,0 +1,4 @@
+ca\fangyux\adminapp\mvc\controller\TestHandler.class
+ca\fangyux\adminapp\service\AdminService.class
+ca\fangyux\adminapp\mapper\AdminMapper.class
+ca\fangyux\adminapp\service\AdminServiceImpl.class

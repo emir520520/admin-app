@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--  加载外部属性文件  -->
+    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+
+    <!--  配置数据源  -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <!-- 连接数据库的用户名 -->
+        <property name="username" value="${jdbc.user}"/>
+        <!-- 连接数据库的密码 -->
+        <property name="password" value="${jdbc.password}"/>
+        <!-- 目标数据库的 URL 地址 -->
+        <property name="url" value="${jdbc.url}"/>
+        <!-- 数据库驱动全类名 -->
+        <property name="driverClassName" value="${jdbc.driver}"/>
+    </bean>
+
+    <!--  配置SqlSessionFactoryBean， 来整合Mybatis  -->
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--    指定Mybatis全局配置文件位置    -->
+        <property name="configLocation" value="classpath:mybatis.xml" />
+        <!--    指定Mapper.xml配置文件位置    -->
+        <property name="mapperLocations" value="classpath:ca/fangyux/adminapp/mapper/*Mapper.xml" />
+        <!--    配置数据源   -->
+        <property name="dataSource" ref="dataSource" />
+     </bean>
+
+    <!--    配置MapperScannerConfigurer来扫描Mapper接口    -->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="ca.fangyux.adminapp.mapper" />
+    </bean>
+</beans>
