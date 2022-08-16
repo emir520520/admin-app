@@ -3,6 +3,9 @@ package ca.fangyux.adminapp.mvc.controller;
 import ca.fangyux.adminapp.entity.Admin;
 import ca.fangyux.adminapp.service.AdminService;
 import ca.fangyux.adminapp.utils.Props;
+import ca.fangyux.adminapp.utils.exception.LoginFailedException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +24,29 @@ public class AdminHandler {
             @RequestParam("login")String account,
             @RequestParam("password")String password,
             HttpSession session) throws Exception {
-        //检查登录信息
-        Admin admin=adminService.getAdminByCredentials(account,password);
+            if(account==null || account=="" || password==null ||password==""){
+                throw new LoginFailedException("Please enter both account name and password!");
+            }
 
-        session.setAttribute(Props.SESSION_ATTRIBUTE_ADMIN,admin);
+            if(session.getAttribute(Props.SESSION_ATTRIBUTE_ADMIN)==null){
+                //检查登录信息
+                Admin admin=adminService.getAdminByCredentials(account,password);
 
-        return "admin-home";
+                session.setAttribute(Props.SESSION_ATTRIBUTE_ADMIN,admin);
+
+                return "admin-home";
+            }
+            Logger logger=LoggerFactory.getLogger(AdminHandler.class);
+            logger.error("=================>"+session.getAttribute(Props.SESSION_ATTRIBUTE_ADMIN).toString());
+
+
+        return "redirect:/admin-home.html";
+    }
+
+    @RequestMapping("/admin/do/logout.html")
+    public String doLogout(HttpSession session){
+        session.invalidate();
+
+        return "redirect:/admin/login.html";
     }
 }

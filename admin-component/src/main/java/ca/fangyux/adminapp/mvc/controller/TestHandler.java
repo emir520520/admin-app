@@ -3,6 +3,7 @@ package ca.fangyux.adminapp.mvc.controller;
 import ca.fangyux.adminapp.entity.Admin;
 import ca.fangyux.adminapp.entity.Student;
 import ca.fangyux.adminapp.service.AdminService;
+import ca.fangyux.adminapp.utils.Props;
 import ca.fangyux.adminapp.utils.ResultEntity;
 import ca.fangyux.adminapp.utils.Utils;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -25,11 +27,14 @@ public class TestHandler {
 
     private Logger logger=LoggerFactory.getLogger(TestHandler.class);
 
-    @RequestMapping("/index.html")
-    public String goHome(){
+    @RequestMapping(value={"/index.html","/#", "/"})
+    public String goHome(HttpSession session){
         logger.debug("inside index controller method");
-        int s=10/0;
-        return "home";
+
+        if(session.getAttribute(Props.SESSION_ATTRIBUTE_ADMIN)==null || session.getAttribute(Props.SESSION_ATTRIBUTE_ADMIN).toString()==""){
+            return "admin-login";
+        }
+        return "redirect:/admin-home.html";
     }
 
     @RequestMapping("/test/ssm.html")
