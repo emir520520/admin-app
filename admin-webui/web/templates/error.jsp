@@ -39,7 +39,7 @@
 
     <%--    requestScope存放的是request域中的数据的集合    --%>
     <%--    requestScope.exception.message相当于request.getAttribute("exception").getMessage()    --%>
-    <h5 class="form-signin-heading" style="text-align:center;"><</i>${requestScope.exception.message}</h5>
+    <h5 class="form-signin-heading" style="text-align:center;"></i>${requestScope.exception.message}</h5>
     <br><br><br>
 </div>
 <button style="width: 125px; margin: auto" class="btn btn-success btn-lg">Go back</button>

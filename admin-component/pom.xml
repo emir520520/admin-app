@@ -85,6 +85,12 @@
             <version>2.2.2</version>
         </dependency>
 
+        <!--    MyBatis分页插件    -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+        </dependency>
+
         <!-- 日志 -->
         <dependency>
             <groupId>org.slf4j</groupId>
