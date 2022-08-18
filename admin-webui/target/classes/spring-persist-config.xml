@@ -27,6 +27,24 @@
         <property name="mapperLocations" value="classpath:ca/fangyux/adminapp/mapper/*Mapper.xml" />
         <!--    配置数据源   -->
         <property name="dataSource" ref="dataSource" />
+        
+        <!--    配置插件   -->
+        <property name="plugins">
+            <array>
+                <!--   配置pagehelper插件    -->
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <props>
+                            <!--   配置数据库方言:告诉pagehelper当前的数据库是哪一种（不同数据库使用的SQL表达式不同）   -->
+                            <prop key="dialect">mysql</prop>
+
+                            <!-- 配置野马的合理化修正（比如一共只有20页，但用户想要第50页或想要-5页 -->
+                            <prop key="reasonable">true</prop>
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
      </bean>
 
     <!--    配置MapperScannerConfigurer来扫描Mapper接口    -->

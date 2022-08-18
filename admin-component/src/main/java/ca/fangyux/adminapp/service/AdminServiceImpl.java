@@ -6,6 +6,8 @@ import ca.fangyux.adminapp.mapper.AdminMapper;
 import ca.fangyux.adminapp.utils.Props;
 import ca.fangyux.adminapp.utils.Utils;
 import ca.fangyux.adminapp.utils.exception.LoginFailedException;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,5 +68,17 @@ public class AdminServiceImpl implements AdminService{
         }
 
         return admin;
+    }
+
+    @Override
+    public PageInfo<Admin> getPageInfo(String keyword, Integer pageNum, Integer pageSize) {
+        //1.调用pageHelper的静态方法开启分页功能(我们不需要该其他任何地方，这叫非侵入式）
+        PageHelper.startPage(pageNum,pageSize);
+
+        //2.执行查询
+        List<Admin> list=adminMapper.selectAdminByKeyword(keyword);
+
+        //3.将查到的结果封装到pageInfo对象中
+        return new PageInfo<>(list);
     }
 }
