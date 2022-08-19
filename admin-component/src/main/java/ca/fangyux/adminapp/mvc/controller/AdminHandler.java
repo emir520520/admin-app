@@ -63,6 +63,11 @@ public class AdminHandler {
 
         model.addAttribute(Props.MODEL_ATTRIBUTE_PAGE_INFO,pageInfo);
 
+        //用于关键词搜素后点击分页页面按钮时还带有之前的关键词
+        if(keyword!=""){
+            model.addAttribute(Props.MODEL_ATTRIBUTE_KEYWORD,keyword);
+        }
+
         return "admin-page";
     }
 }

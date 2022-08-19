@@ -49,7 +49,7 @@ public class DatabaseTest {
 
     @Test
     public void testAddMockAdminReords(){
-        for(int i=0;i<23;i++){
+        for(int i=0;i<233;i++){
             adminMapper.insert(new Admin("login"+i+2, "userPswd"+i+2,"userName"+i+2, "email"+i+2));
         }
     }

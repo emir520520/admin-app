@@ -6,6 +6,9 @@
 <script type="text/javascript" src="../static/jquery/jquery.pagination.js"></script>
 <script type="text/javascript">
     $(function (){
+        //显示上个页面搜索的关键词
+        $("#search-keyword").val(${requestScope.keyword});
+
         //页面导航条初始化
         initPagination();
     });
@@ -32,8 +35,11 @@
             //计算pageNum
             var pageNum=pageIndex+1;
 
+            //获得当前的关键词
+            var keyword=$("#search-keyword").val();
+
             //跳转页面
-            window.location.href="admin/get/page.html?pageNum="+pageNum;
+            window.location.href="admin/get/page.html?pageNum="+pageNum+"&keyword="+keyword;
 
             //由于每一个页码按钮都是超链接，它默认跳转到上面的地址，但是那是不正确的，因为没有加host和contextPath。
             //我们要取消超链接的默认行为
@@ -53,14 +59,14 @@
                     <h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> Data List</h3>
                 </div>
                 <div class="panel-body">
-                    <form class="form-inline" role="form" style="float:left;">
+                    <form action="/admin/get/page.html" class="form-inline" role="form" style="float:left;">
                         <div class="form-group has-feedback">
                             <div class="input-group">
                                 <div class="input-group-addon">Search Condition</div>
-                                <input class="form-control has-success" type="text" placeholder="Please enter conditions for search">
+                                <input name="keyword" id="search-keyword" class="form-control has-success" type="text" placeholder="Please enter conditions for search">
                             </div>
                         </div>
-                        <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> Search</button>
+                        <button type="submit" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> Search</button>
                     </form>
                     <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> Delete</button>
                     <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='add.html'"><i class="glyphicon glyphicon-plus"></i> Add</button>
