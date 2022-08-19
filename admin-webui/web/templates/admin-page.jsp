@@ -2,6 +2,46 @@
 <!DOCTYPE html>
 <html>
 <%@ include file="page-components/head.jsp"%>
+<link rel="stylesheet" href="../static/css/pagination.css" />
+<script type="text/javascript" src="../static/jquery/jquery.pagination.js"></script>
+<script type="text/javascript">
+    $(function (){
+        //页面导航条初始化
+        initPagination();
+    });
+
+    function initPagination(){
+        //获得admin记录的总数
+        var totalRecord=${requestScope.pageInfo.total};
+
+        //生命一个属性设置pagination函数所需的属性
+        var properties={
+            num_edge_entries: 3,        //边缘页数量
+            num_display_entries: 5,     //主体页数量
+            callback: pageSelectCallback,       //用户点击页码时，调用这个函数进行跳转
+            items_per_page: ${requestScope.pageInfo.pageSize},
+            current_page: ${requestScope.pageInfo.pageNum-1},   //Pagination内部使用pageIndex(从0开始），而pageNum从1开始
+            prev_text: "Previous",
+            next_text: "Next"
+        };
+
+        $("#Pagination").pagination(totalRecord, properties);
+
+        //用户点击页码时，调用这个函数进行跳转
+        function pageSelectCallback(pageIndex, jQuery){
+            //计算pageNum
+            var pageNum=pageIndex+1;
+
+            //跳转页面
+            window.location.href="admin/get/page.html?pageNum="+pageNum;
+
+            //由于每一个页码按钮都是超链接，它默认跳转到上面的地址，但是那是不正确的，因为没有加host和contextPath。
+            //我们要取消超链接的默认行为
+            return false;
+        }
+    }
+</script>
+
 <body>
 <%@include file="page-components/nav.jsp"%>
 <div class="container-fluid">
@@ -63,20 +103,11 @@
                             </c:if>
                             </tbody>
                             <tfoot>
-                            <tr>
-                                <td colspan="6" align="center">
-                                    <ul class="pagination">
-                                        <li class="disabled"><a href="#">Previous Page</a></li>
-                                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">Next Page</a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-
+                                <tr>
+                                    <td colspan="6" align="center">
+                                        <div id="Pagination" class="pagination"></div>
+                                    </td>
+                                </tr>
                             </tfoot>
                         </table>
                     </div>

@@ -46,4 +46,11 @@ public class DatabaseTest {
         Admin admin=new Admin(null, "f1138675990", "6666", "fangyux", "1138675990@qq.com", null);
         adminService.saveAdmin(admin);
     }
+
+    @Test
+    public void testAddMockAdminReords(){
+        for(int i=0;i<23;i++){
+            adminMapper.insert(new Admin("login"+i+2, "userPswd"+i+2,"userName"+i+2, "email"+i+2));
+        }
+    }
 }

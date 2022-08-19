@@ -21,6 +21,13 @@ public class Admin {
 
     private String createTime;
 
+    public Admin(String loginAcct, String userName, String userPswd, String email) {
+        this.loginAcct=loginAcct;
+        this.userName=userName;
+        this.userPswd=userPswd;
+        this.email=email;
+    }
+
     public Integer getId() {
         return id;
     }
