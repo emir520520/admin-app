@@ -13,31 +13,30 @@
             <ol class="breadcrumb">
                 <li><a href="/admin-home.html">Home</a></li>
                 <li><a href="/admin/get/page.html">Admin List</a></li>
-                <li class="active">Add</li>
+                <li class="active">Edit</li>
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Table Data<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
-                    <form action="admin/save.html" role="form">
+                    <form action="admin/update.html" role="form">
+                        <input type="hidden" name="id" value="${requestScope.admin.id}">
+                        <input type="hidden" name="pageNum" value="${requestScope.pageNum}">
+                        <input type="hidden" name="keyword" value="${requestScope.keyword}">
                         <p>${requestScope.exception.message}</p>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Login Account</label>
-                            <input name="loginAcct" type="text" class="form-control" id="exampleInputPassword1" placeholder="Please enter login account">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input name="userPswd" type="text" class="form-control" id="exampleInputPassword2" placeholder="Please enter password">
+                            <input value="${requestScope.admin.loginAcct}" name="loginAcct" type="text" class="form-control" id="exampleInputPassword1" placeholder="Please enter login account">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">User Name</label>
-                            <input name="userName" type="text" class="form-control" id="exampleInputPassword3" placeholder="Please enter user name">
+                            <input value="${requestScope.admin.userName}" name="userName" type="text" class="form-control" id="exampleInputPassword3" placeholder="Please enter user name">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email</label>
-                            <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Please enter email address">
+                            <input value="${requestScope.admin.email}" name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Please enter email address">
                             <p class="help-block label label-warning">Please enter valid email address format： xxxx@xxxx.com</p>
                         </div>
-                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Add</button>
+                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i> Edit</button>
                         <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> Reset</button>
                     </form>
                 </div>

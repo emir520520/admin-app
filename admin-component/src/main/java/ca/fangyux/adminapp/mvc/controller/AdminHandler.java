@@ -3,11 +3,14 @@ package ca.fangyux.adminapp.mvc.controller;
 import ca.fangyux.adminapp.entity.Admin;
 import ca.fangyux.adminapp.service.AdminService;
 import ca.fangyux.adminapp.utils.Props;
+import ca.fangyux.adminapp.utils.exception.LoginAcctAlreadyExistException;
+import ca.fangyux.adminapp.utils.exception.LoginAcctAlreadyExistForUpdateException;
 import ca.fangyux.adminapp.utils.exception.LoginFailedException;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -98,5 +101,38 @@ public class AdminHandler {
         adminService.saveAdmin(admin);
 
         return "redirect:/admin/get/page.html?pageNum="+Integer.MAX_VALUE;
+    }
+
+    @RequestMapping("/admin/to/edit/page.html")
+    public String toAdminPage(
+            @RequestParam("adminId")Integer adminId,
+            @RequestParam("pageNum")Integer pageNum,
+            @RequestParam("keyword")String keyword,
+            Model model
+    ){
+        Admin admin=adminService.getAdminById(adminId);
+
+        model.addAttribute(Props.SESSION_ATTRIBUTE_ADMIN,admin);
+        model.addAttribute("pageNum",pageNum);
+        model.addAttribute(Props.MODEL_ATTRIBUTE_KEYWORD,keyword);
+
+        return "admin-edit";
+    }
+
+    @RequestMapping("admin/update.html")
+    public String updateAdmin(
+            @RequestParam("pageNum")Integer pageNum,
+            @RequestParam("keyword")String keyword,
+            Admin admin
+    ){
+        try {
+            adminService.update(admin);
+        }catch (Exception e){
+            if(e instanceof DuplicateKeyException){
+                throw new LoginAcctAlreadyExistForUpdateException(Props.MSG_DUPLICATE_LOGINACCT);
+            }
+        }
+
+        return "redirect:/admin/get/page.html?pageNum="+pageNum+"&keyword="+keyword;
     }
 }

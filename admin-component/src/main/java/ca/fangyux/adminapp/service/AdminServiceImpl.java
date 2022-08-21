@@ -106,4 +106,15 @@ public class AdminServiceImpl implements AdminService{
     public void remove(Integer id) {
         adminMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public Admin getAdminById(Integer adminId) {
+        return adminMapper.selectByPrimaryKey(adminId);
+    }
+
+    @Override
+    public void update(Admin admin) {
+        //Selective表示有选择地更新，对于值为null的字段不更新
+        adminMapper.updateByPrimaryKeySelective(admin);
+    }
 }

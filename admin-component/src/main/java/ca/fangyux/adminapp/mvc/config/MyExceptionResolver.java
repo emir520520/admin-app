@@ -4,6 +4,7 @@ import ca.fangyux.adminapp.utils.Props;
 import ca.fangyux.adminapp.utils.ResultEntity;
 import ca.fangyux.adminapp.utils.Utils;
 import ca.fangyux.adminapp.utils.exception.LoginAcctAlreadyExistException;
+import ca.fangyux.adminapp.utils.exception.LoginAcctAlreadyExistForUpdateException;
 import ca.fangyux.adminapp.utils.exception.LoginFailedException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -71,6 +72,16 @@ public class MyExceptionResolver {
             HttpServletResponse response,
             HttpServletRequest request) throws IOException {
         String view="admin-add";
+
+        return commonResolve(view, exception, request, response);
+    }
+
+    @ExceptionHandler(value= LoginAcctAlreadyExistForUpdateException.class)
+    public ModelAndView resolveLoginAcctAlreadyExistForUpdateException(
+            LoginAcctAlreadyExistForUpdateException exception,
+            HttpServletResponse response,
+            HttpServletRequest request) throws IOException {
+        String view="error";
 
         return commonResolve(view, exception, request, response);
     }
