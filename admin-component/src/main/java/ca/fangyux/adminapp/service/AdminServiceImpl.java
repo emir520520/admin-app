@@ -81,4 +81,9 @@ public class AdminServiceImpl implements AdminService{
         //3.将查到的结果封装到pageInfo对象中
         return new PageInfo<>(list);
     }
+
+    @Override
+    public void remove(Integer id) {
+        adminMapper.deleteByPrimaryKey(id);
+    }
 }

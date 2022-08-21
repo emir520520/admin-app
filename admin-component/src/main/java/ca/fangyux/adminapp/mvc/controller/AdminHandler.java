@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -69,5 +70,26 @@ public class AdminHandler {
         }
 
         return "admin-page";
+    }
+
+    @RequestMapping("/admin/remove/{id}/{pageNum}/{keyword}.html")
+    public String removeSingleAdminRecord(
+            @PathVariable("id")Integer id,
+            @PathVariable("pageNum")Integer pageNum,
+            @PathVariable("keyword")String keyword,
+            HttpSession session){
+        //当前用户不能删除自己（已登陆用户）
+        Admin admin= (Admin) session.getAttribute(Props.SESSION_ATTRIBUTE_ADMIN);
+
+        if(admin.getId()==id){
+            throw new RuntimeException("can not delete current login admin");
+        }
+
+
+        //执行删除
+        adminService.remove(id);
+
+        //页面跳转
+        return "redirect:/admin/get/page.html?pageNum="+pageNum+"&keyword="+keyword;
     }
 }

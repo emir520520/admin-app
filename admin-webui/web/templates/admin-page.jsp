@@ -69,7 +69,7 @@
                         <button type="submit" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> Search</button>
                     </form>
                     <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> Delete</button>
-                    <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='add.html'"><i class="glyphicon glyphicon-plus"></i> Add</button>
+                    <a href="admin/to/add/page.html" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>Add</a>
                     <br>
                     <hr style="clear:both;">
                     <div class="table-responsive">
@@ -102,7 +102,7 @@
                                         <td>
                                             <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
                                             <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-                                            <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
+                                            <a href="admin/remove/${admin.id}/${requestScope.pageInfo.pageNum}/${requestScope.keyword}.html" class="btn btn-danger btn-xs" ><i class="glyphicon glyphicon-remove"></i></a>
                                         </td>
                                     </tr>
                                 </c:forEach>

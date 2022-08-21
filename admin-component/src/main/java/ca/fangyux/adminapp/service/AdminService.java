@@ -13,4 +13,6 @@ public interface AdminService {
     Admin getAdminByCredentials(String account, String password) throws Exception;
 
     PageInfo<Admin> getPageInfo(String keyword, Integer pageNum, Integer pageSize);
+
+    void remove(Integer id);
 }
