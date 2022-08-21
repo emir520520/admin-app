@@ -92,4 +92,11 @@ public class AdminHandler {
         //页面跳转
         return "redirect:/admin/get/page.html?pageNum="+pageNum+"&keyword="+keyword;
     }
+
+    @RequestMapping("/admin/save.html")
+    public String save(Admin admin) throws Exception {
+        adminService.saveAdmin(admin);
+
+        return "redirect:/admin/get/page.html?pageNum="+Integer.MAX_VALUE;
+    }
 }

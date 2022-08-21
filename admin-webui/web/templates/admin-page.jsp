@@ -69,7 +69,7 @@
                         <button type="submit" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> Search</button>
                     </form>
                     <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> Delete</button>
-                    <a href="admin/to/add/page.html" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>Add</a>
+                    <a href="admin/to/add/page.html" style="float: right;" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>Add</a>
                     <br>
                     <hr style="clear:both;">
                     <div class="table-responsive">

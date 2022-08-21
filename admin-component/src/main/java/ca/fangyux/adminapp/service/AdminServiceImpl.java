@@ -5,12 +5,16 @@ import ca.fangyux.adminapp.entity.AdminExample;
 import ca.fangyux.adminapp.mapper.AdminMapper;
 import ca.fangyux.adminapp.utils.Props;
 import ca.fangyux.adminapp.utils.Utils;
+import ca.fangyux.adminapp.utils.exception.LoginAcctAlreadyExistException;
 import ca.fangyux.adminapp.utils.exception.LoginFailedException;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,8 +26,24 @@ public class AdminServiceImpl implements AdminService{
 
     @Override
     public void saveAdmin(Admin admin) throws Exception {
-        adminMapper.insert(admin);
-//        System.out.println(1/0);
+        //密码加密
+        String userPswd=admin.getUserPswd();
+        userPswd=Utils.MD5(userPswd);
+        admin.setUserPswd(userPswd);
+
+        //生成创建时间
+        Date date=new Date();
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String creationTime=dateFormat.format(date);
+        admin.setCreateTime(creationTime);
+
+        try {
+            adminMapper.insert(admin);
+        }catch (Exception e){
+            if(e instanceof DuplicateKeyException){
+                throw new LoginAcctAlreadyExistException(Props.MSG_DUPLICATE_LOGINACCT);
+            }
+        }
     }
 
     @Override
