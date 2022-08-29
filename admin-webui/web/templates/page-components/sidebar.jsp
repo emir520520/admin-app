@@ -19,7 +19,7 @@
                         <a href="admin/get/page.html"><i class="glyphicon glyphicon-user"></i> Users Management</a>
                     </li>
                     <li style="height:30px;">
-                        <a href="role.html"><i class="glyphicon glyphicon-king"></i> Role Management</a>
+                        <a href="role/to/page.html"><i class="glyphicon glyphicon-king"></i> Role Management</a>
                     </li>
                     <li style="height:30px;">
                         <a href="permission.html"><i class="glyphicon glyphicon-lock"></i> Menu Management</a>
