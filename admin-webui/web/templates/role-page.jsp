@@ -8,9 +8,10 @@
 <script type="text/javascript">
     $(function(){
        //为分页操作准备初始化数据将变量设置为全局变量
-        window.pageNum=1;
         window.pageSize=5;
         window.keyword="";
+
+        generatePage(1);
     });
 </script>
 <body>
@@ -48,33 +49,14 @@
                                     <th width="100">Action</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td><input type="checkbox"></td>
-                                    <td>PM - Project Manager</td>
-                                    <td>
-                                        <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-                                        <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-                                        <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-                                    </td>
-                                </tr>
+                                <tbody id="tbody">
                                 </tbody>
                                 <tfoot>
-                                <tr>
-                                    <td colspan="6" align="center">
-                                        <ul class="pagination">
-                                            <li class="disabled"><a href="#">Previous</a></li>
-                                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                            <li><a href="#">Next</a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-
+                                    <tr>
+                                        <td colspan="6" align="center">
+                                            <div id="Pagination" class="pagination"></div>
+                                        </td>
+                                    </tr>
                                 </tfoot>
                             </table>
                         </div>

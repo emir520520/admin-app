@@ -17,7 +17,7 @@
         //获得admin记录的总数
         var totalRecord=${requestScope.pageInfo.total};
 
-        //生命一个属性设置pagination函数所需的属性
+        //声明一个属性设置pagination函数所需的属性
         var properties={
             num_edge_entries: 3,        //边缘页数量
             num_display_entries: 5,     //主体页数量
