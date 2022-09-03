@@ -1,7 +1,7 @@
 //总的function,用来调用各个细分的function
-function generatePage(pageNum){
+function generatePage(){
     //获取分页数据
-    var pageInfo=getPageInfo(pageNum).data;
+    var pageInfo=getPageInfo().data;
 
     //填充表格
     fillTable(pageInfo.list);
@@ -11,14 +11,14 @@ function generatePage(pageNum){
 }
 
 //获取pageInfo函数
-function getPageInfo(pageNum){
+function getPageInfo(){
     var res;
 
     $.ajax({
         url: "/role/get/page/info.json",
         type: "post",
         data: {
-            "pageNum": pageNum,
+            "pageNum": window.pageNum,
             "pageSize": window.pageSize,
             "keyword": window.keyword
         },
@@ -39,6 +39,9 @@ function getPageInfo(pageNum){
 function fillTable(pageInfo){
     //清除tbody中原有数据
     $("#tbody").empty();
+
+    //清空分页导航条
+    $("#Pagination").empty();
 
     if(pageInfo==null || pageInfo.length==0){
         $("#tbody").append("<tr><td colspan='4'>No data found for you</td></tr>");
@@ -89,10 +92,10 @@ function generateNavigationBar(pageInfo){
 //用户点击页码时，调用这个函数进行跳转
 function pageSelectCallback(pageIndex, jQuery){
     //计算pageNum
-    var pageNum=pageIndex+1;
+    window.pageNum=pageIndex+1;
 
     //调用分页函数
-    generatePage(pageNum);
+    generatePage();
 
     //由于每一个页码按钮都是超链接，它默认跳转到上面的地址，但是那是不正确的，因为没有加host和contextPath。
     //我们要取消超链接的默认行为

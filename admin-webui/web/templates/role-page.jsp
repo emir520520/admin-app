@@ -8,10 +8,60 @@
 <script type="text/javascript">
     $(function(){
        //为分页操作准备初始化数据将变量设置为全局变量
+        window.pageNum=1;
         window.pageSize=5;
         window.keyword="";
 
-        generatePage(1);
+        //调用分页函数
+        generatePage();
+
+        //给查询按钮绑定点击响应函数
+        $("#btn-search").click(function (){
+            window.keyword=$("#input-keyword").val();
+
+            generatePage();
+        });
+
+        //给添加按钮绑定点击函数
+        $("#btn-show-modal-add").click(function (){
+           $("#modal-role-add").modal("show");
+        });
+
+        //给模态框中的添加按钮绑定点击响应函数
+        $("#btn-role-add").click(function (){
+            var roleName=$.trim($("#input-roleName").val());
+
+            $.ajax({
+                url: "role/add.json",
+                type: "post",
+                data: {
+                    "roleName": roleName,
+                },
+                dataType: "json",
+                success: function (response){
+                    var result=response.result;
+
+                    if(result==="SUCCESS"){
+                        layer.msg("Role successfully added");
+
+                        //跳转到最后一页以显示刚刚添加成功的角色记录
+                        window.pageNum=999999;
+                        generatePage();
+                    }else if(result==="FAIL"){
+                        layer.msg("Role add failed. "+response.message);
+                    }
+                },
+                error: function (response) {
+                    layer.msg(response.status+" "+response.statusText);
+                }
+            });
+
+            //关闭模态框
+            $("#modal-role-add").modal("hide");
+
+            //清除模态框
+            $("#input-roleName").val("");
+        });
     });
 </script>
 <body>
@@ -30,13 +80,13 @@
                             <div class="form-group has-feedback">
                                 <div class="input-group">
                                     <div class="input-group-addon">Conditional Search</div>
-                                    <input class="form-control has-success" type="text" placeholder="Please enter conditions">
+                                    <input id="input-keyword" class="form-control has-success" type="text" placeholder="Please enter conditions">
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> Search</button>
+                            <button id="btn-search" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> Search</button>
                         </form>
                         <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> Delete</button>
-                        <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='form.html'"><i class="glyphicon glyphicon-plus"></i> Add</button>
+                        <button id="btn-show-modal-add" type="button" class="btn btn-primary" style="float:right;"><i class="glyphicon glyphicon-plus"></i> Add</button>
                         <br>
                         <hr style="clear:both;">
                         <div class="table-responsive">
@@ -66,5 +116,7 @@
         </div>
     </div>
 </div>
+
+<%@include file="modal-role-add.jsp"%>
 </body>
 </html>

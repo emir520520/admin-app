@@ -24,7 +24,7 @@ public class RoleHandler {
             @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
             @RequestParam(value = "keyword", defaultValue = "")String keyword
     ){
-        //由于之前已经写过了MyExceptionResolver，这里就不用try,catch了（因为有可能数据库不能正常返回数据）
+        //由于之前已经写过了MyExceptionResolver，这里就不用try,catch了（有可能数据库不能正常返回数据）
         PageInfo<Role> pageInfo = roleService.getPageInfo(pageNum, pageSize, keyword);
 
         return ResultEntity.successWithtData(pageInfo);

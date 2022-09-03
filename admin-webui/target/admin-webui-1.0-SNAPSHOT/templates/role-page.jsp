@@ -8,10 +8,24 @@
 <script type="text/javascript">
     $(function(){
        //为分页操作准备初始化数据将变量设置为全局变量
+        window.pageNum=1;
         window.pageSize=5;
         window.keyword="";
 
-        generatePage(1);
+        //调用分页函数
+        generatePage();
+
+        //给查询按钮绑定点击响应函数
+        $("#btn-search").click(function (){
+            window.keyword=$("#input-keyword").val();
+
+            generatePage();
+        });
+
+        //给添加按钮绑定点击函数
+        $("#btn-show-modal-add").click(function (){
+           $("#modal-role-add").modal("show");
+        });
     });
 </script>
 <body>
@@ -30,13 +44,13 @@
                             <div class="form-group has-feedback">
                                 <div class="input-group">
                                     <div class="input-group-addon">Conditional Search</div>
-                                    <input class="form-control has-success" type="text" placeholder="Please enter conditions">
+                                    <input id="input-keyword" class="form-control has-success" type="text" placeholder="Please enter conditions">
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> Search</button>
+                            <button id="btn-search" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> Search</button>
                         </form>
                         <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> Delete</button>
-                        <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='form.html'"><i class="glyphicon glyphicon-plus"></i> Add</button>
+                        <button id="btn-show-modal-add" type="button" class="btn btn-primary" style="float:right;"><i class="glyphicon glyphicon-plus"></i> Add</button>
                         <br>
                         <hr style="clear:both;">
                         <div class="table-responsive">
@@ -66,5 +80,7 @@
         </div>
     </div>
 </div>
+
+<%@include file="modal-role-add.jsp"%>
 </body>
 </html>

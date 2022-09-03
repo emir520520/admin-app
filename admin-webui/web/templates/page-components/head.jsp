@@ -14,13 +14,13 @@
   <meta name="author" content="">
 
   <base href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
-  <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="../static/css/font-awesome.min.css">
   <link rel="stylesheet" href="../static/css/main.css">
 
   <script src="../static/jquery/jquery-2.1.1.min.js"></script>
   <script src="../static/layer-v3.1.1/layer/layer.js"></script>
-  <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../static/bootstrap/js/bootstrap.js"></script>
   <style>
     .tree li {
       list-style-type: none;
