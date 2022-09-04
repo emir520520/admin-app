@@ -27,7 +27,7 @@
            $("#modal-role-add").modal("show");
         });
 
-        //给模态框中的添加按钮绑定点击响应函数
+        //给角色添加模态框中的添加按钮绑定点击响应函数
         $("#btn-role-add").click(function (){
             var roleName=$.trim($("#input-roleName").val());
 
@@ -35,7 +35,7 @@
                 url: "role/add.json",
                 type: "post",
                 data: {
-                    "name": roleName,
+                    "name": roleName
                 },
                 dataType: "json",
                 success: function (response){
@@ -46,6 +46,7 @@
 
                         //跳转到最后一页以显示刚刚添加成功的角色记录
                         window.pageNum=999999;
+
                         generatePage();
                     }else if(result==="FAIL"){
                         layer.msg("Role add failed. "+response.message);
@@ -63,9 +64,36 @@
             $("#input-roleName").val("");
         });
 
-        //给每个角色记录的铅笔按钮绑定点击响应函数
-        $(".btn-pencil").click(function (){
-            alert(this.id);
+        //给角色更新模态框中的更新按钮绑定点击响应函数
+        $("#btn-role-update").click(function (){
+            var roleName=$.trim($("#input-roleName-update").val());
+
+            $.ajax({
+                url: "role/update.json",
+                type: "post",
+                data: {
+                    "id": window.roleId,
+                    "name": roleName
+                },
+                dataType: "json",
+                success: function (response){
+                    var result=response.result;
+
+                    if(result==="SUCCESS"){
+                        layer.msg("Role successfully updated");
+
+                        generatePage();
+                    }else if(result==="FAIL"){
+                        layer.msg("Role update failed. "+response.message);
+                    }
+                },
+                error: function (response) {
+                    layer.msg(response.status+" "+response.statusText);
+                }
+            });
+
+            //关闭模态框
+            $("#modal-role-update").modal("hide");
         });
     });
 </script>

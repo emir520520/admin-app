@@ -5,8 +5,6 @@ import ca.fangyux.adminapp.service.RoleService;
 import ca.fangyux.adminapp.utils.ResultEntity;
 import ca.fangyux.adminapp.utils.exception.RoleNameAlreadyExistsException;
 import com.github.pagehelper.PageInfo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
@@ -39,6 +37,20 @@ public class RoleHandler {
     public ResultEntity<String> addRole(Role role){
         try{
             roleService.addRole(role);
+        }catch (Exception e){
+            if(e instanceof DuplicateKeyException){
+                throw new RoleNameAlreadyExistsException("Role Name already exists! Please try another one.");
+            }
+        }
+
+        return ResultEntity.successWithoutData();
+    }
+
+    @ResponseBody
+    @RequestMapping("role/update.json")
+    public ResultEntity<String> updateRole(Role role){
+        try{
+            roleService.updateRole(role);
         }catch (Exception e){
             if(e instanceof DuplicateKeyException){
                 throw new RoleNameAlreadyExistsException("Role Name already exists! Please try another one.");

@@ -8,6 +8,21 @@ function generatePage(){
 
     //调用分页导航栏生成函数
     generateNavigationBar(pageInfo);
+
+    //给每个角色记录的铅笔按钮(修改按钮）绑定点击响应函数
+    $(".btn-pencil").click(function (){
+        //获取当前点击的角色记录的roleName
+        var roleName=$(this).parent().prev().text();
+
+        //获取当前点击的角色记录的roleId
+        window.roleId=this.id;
+
+        //回显模态框中的文本框
+        $("#modal-role-update [id=input-roleName-update]").val(roleName);
+
+        //打开模态框
+        $("#modal-role-update").modal("show");
+    });
 }
 
 //获取pageInfo函数
