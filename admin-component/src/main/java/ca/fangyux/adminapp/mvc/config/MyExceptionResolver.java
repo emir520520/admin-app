@@ -6,6 +6,7 @@ import ca.fangyux.adminapp.utils.Utils;
 import ca.fangyux.adminapp.utils.exception.LoginAcctAlreadyExistException;
 import ca.fangyux.adminapp.utils.exception.LoginAcctAlreadyExistForUpdateException;
 import ca.fangyux.adminapp.utils.exception.LoginFailedException;
+import ca.fangyux.adminapp.utils.exception.RoleNameAlreadyExistsException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.springframework.dao.DuplicateKeyException;
@@ -48,13 +49,13 @@ public class MyExceptionResolver {
         //请求为Ajax类型
         if(requestType==true){
             //创建ResultEntity对象
-            ResultEntity<Object> resultEntity=ResultEntity.failed(String.valueOf(exception.getClass()));
+            ResultEntity<Object> resultEntity=ResultEntity.failed(String.valueOf(exception.getMessage()));
 
             ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
             String json = ow.writeValueAsString(resultEntity);
 
             response.getWriter().write(json);
-            response.setStatus(500);
+            response.setStatus(200);
 
             return null;
         }else{
@@ -84,5 +85,14 @@ public class MyExceptionResolver {
         String view="error";
 
         return commonResolve(view, exception, request, response);
+    }
+
+    @ExceptionHandler(value= RoleNameAlreadyExistsException.class)
+    public ModelAndView roleNameAlreadyExistForUpdateException(
+            RoleNameAlreadyExistsException exception,
+            HttpServletResponse response,
+            HttpServletRequest request) throws IOException {
+
+        return commonResolve(null, exception, request, response);
     }
 }

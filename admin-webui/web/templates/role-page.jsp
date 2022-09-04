@@ -35,7 +35,7 @@
                 url: "role/add.json",
                 type: "post",
                 data: {
-                    "roleName": roleName,
+                    "name": roleName,
                 },
                 dataType: "json",
                 success: function (response){
@@ -61,6 +61,11 @@
 
             //清除模态框
             $("#input-roleName").val("");
+        });
+
+        //给每个角色记录的铅笔按钮绑定点击响应函数
+        $(".btn-pencil").click(function (){
+            alert(this.id);
         });
     });
 </script>
@@ -118,5 +123,6 @@
 </div>
 
 <%@include file="modal-role-add.jsp"%>
+<%@include file="modal-role-edit.jsp"%>
 </body>
 </html>

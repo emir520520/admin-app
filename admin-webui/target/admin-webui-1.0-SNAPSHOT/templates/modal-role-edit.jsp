@@ -1,4 +1,4 @@
-<div class="modal" tabindex="-1" id="modal-role-add">
+<div class="modal" tabindex="-1" id="modal-role-update">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,7 +13,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button id="btn-role-add"  type="button" class="btn btn-primary">Add</button>
+                <button id="btn-role-update"  type="button" class="btn btn-success">Save</button>
             </div>
         </div>
     </div>

@@ -1,6 +1,11 @@
-ca/fangyux/adminapp/mvc/controller/AdminHandler.class
+ca/fangyux/adminapp/service/RoleService.class
 ca/fangyux/adminapp/mvc/config/MyExceptionResolver.class
+ca/fangyux/adminapp/mvc/controller/RoleHandler.class
 ca/fangyux/adminapp/service/AdminService.class
+ca/fangyux/adminapp/mapper/AdminMapper.class
+ca/fangyux/adminapp/mvc/interceptor/LoginInterceptor.class
+ca/fangyux/adminapp/mapper/RoleMapper.class
+ca/fangyux/adminapp/mvc/controller/AdminHandler.class
 ca/fangyux/adminapp/service/AdminServiceImpl.class
 ca/fangyux/adminapp/mvc/controller/TestHandler.class
-ca/fangyux/adminapp/mapper/AdminMapper.class
+ca/fangyux/adminapp/service/RoleServiceImpl.class

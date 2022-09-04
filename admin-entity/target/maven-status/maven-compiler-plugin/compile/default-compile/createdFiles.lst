@@ -1,8 +1,13 @@
+ca/fangyux/adminapp/entity/Role.class
 ca/fangyux/adminapp/entity/Subject.class
+ca/fangyux/adminapp/entity/RoleExample$Criterion.class
 ca/fangyux/adminapp/entity/AdminExample.class
 ca/fangyux/adminapp/entity/AdminExample$Criteria.class
+ca/fangyux/adminapp/entity/RoleExample$Criteria.class
+ca/fangyux/adminapp/entity/Admin.class
+ca/fangyux/adminapp/entity/RoleExample$GeneratedCriteria.class
 ca/fangyux/adminapp/entity/Student.class
 ca/fangyux/adminapp/entity/Address.class
-ca/fangyux/adminapp/entity/Admin.class
+ca/fangyux/adminapp/entity/RoleExample.class
 ca/fangyux/adminapp/entity/AdminExample$Criterion.class
 ca/fangyux/adminapp/entity/AdminExample$GeneratedCriteria.class

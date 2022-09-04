@@ -26,6 +26,47 @@
         $("#btn-show-modal-add").click(function (){
            $("#modal-role-add").modal("show");
         });
+
+        //给模态框中的添加按钮绑定点击响应函数
+        $("#btn-role-add").click(function (){
+            var roleName=$.trim($("#input-roleName").val());
+
+            $.ajax({
+                url: "role/add.json",
+                type: "post",
+                data: {
+                    "name": roleName,
+                },
+                dataType: "json",
+                success: function (response){
+                    var result=response.result;
+
+                    if(result==="SUCCESS"){
+                        layer.msg("Role successfully added");
+
+                        //跳转到最后一页以显示刚刚添加成功的角色记录
+                        window.pageNum=999999;
+                        generatePage();
+                    }else if(result==="FAIL"){
+                        layer.msg("Role add failed. "+response.message);
+                    }
+                },
+                error: function (response) {
+                    layer.msg(response.status+" "+response.statusText);
+                }
+            });
+
+            //关闭模态框
+            $("#modal-role-add").modal("hide");
+
+            //清除模态框
+            $("#input-roleName").val("");
+        });
+
+        //给每个角色记录的铅笔按钮绑定点击响应函数
+        $(".btn-pencil").click(function (){
+            alert(this.id);
+        });
     });
 </script>
 <body>
@@ -82,5 +123,6 @@
 </div>
 
 <%@include file="modal-role-add.jsp"%>
+<%@include file="modal-role-edit.jsp"%>
 </body>
 </html>

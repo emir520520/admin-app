@@ -1,6 +1,11 @@
 /Users/fangyuxiao/admin-app/admin-app/admin-component/src/main/java/ca/fangyux/adminapp/mvc/controller/AdminHandler.java
+/Users/fangyuxiao/admin-app/admin-app/admin-component/src/main/java/ca/fangyux/adminapp/mapper/RoleMapper.java
+/Users/fangyuxiao/admin-app/admin-app/admin-component/src/main/java/ca/fangyux/adminapp/service/RoleService.java
 /Users/fangyuxiao/admin-app/admin-app/admin-component/src/main/java/ca/fangyux/adminapp/service/AdminServiceImpl.java
 /Users/fangyuxiao/admin-app/admin-app/admin-component/src/main/java/ca/fangyux/adminapp/mvc/controller/TestHandler.java
 /Users/fangyuxiao/admin-app/admin-app/admin-component/src/main/java/ca/fangyux/adminapp/service/AdminService.java
+/Users/fangyuxiao/admin-app/admin-app/admin-component/src/main/java/ca/fangyux/adminapp/service/RoleServiceImpl.java
 /Users/fangyuxiao/admin-app/admin-app/admin-component/src/main/java/ca/fangyux/adminapp/mvc/config/MyExceptionResolver.java
+/Users/fangyuxiao/admin-app/admin-app/admin-component/src/main/java/ca/fangyux/adminapp/mvc/interceptor/LoginInterceptor.java
 /Users/fangyuxiao/admin-app/admin-app/admin-component/src/main/java/ca/fangyux/adminapp/mapper/AdminMapper.java
+/Users/fangyuxiao/admin-app/admin-app/admin-component/src/main/java/ca/fangyux/adminapp/mvc/controller/RoleHandler.java
