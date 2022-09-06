@@ -4,7 +4,7 @@
 <%@ include file="page-components/head.jsp"%>
 <link rel="stylesheet" href="../static/css/pagination.css" />
 <script type="text/javascript" src="../static/jquery/jquery.pagination.js"></script>
-<script type="text/javascript" src="../static/my-js/role-get-list.js"></script>
+<script type="text/javascript" src="../static/my-js/role-operation.js"></script>
 <script type="text/javascript">
     $(function(){
        //为分页操作准备初始化数据将变量设置为全局变量
@@ -95,6 +95,37 @@
             //关闭模态框
             $("#modal-role-update").modal("hide");
         });
+
+        //给角色删除模态框中的删除按钮绑定点击响应函数
+        $("#btn-role-delete").click(function (){
+            //将全局变量中的roleId数组转换成JSON字符串
+            var requestBody=JSON.stringify(window.roleIdList);
+
+            $.ajax({
+                url: "role/delete/by/role/id/array.json",
+                type: "post",
+                data: requestBody,
+                contentType: "application/json",
+                dataType: "json",
+                success: function (response){
+                    var result=response.result;
+
+                    if(result==="SUCCESS"){
+                        layer.msg("Role successfully deleted");
+
+                        generatePage();
+                    }else if(result==="FAIL"){
+                        layer.msg("Role delete failed. "+response.message);
+                    }
+                },
+                error: function (response) {
+                    layer.msg(response.status+" "+response.statusText);
+                }
+            });
+
+            //关闭模态框
+            $("#modal-role-delete-confirmation").modal("hide");
+        });
     });
 </script>
 <body>
@@ -152,5 +183,6 @@
 
 <%@include file="modal-role-add.jsp"%>
 <%@include file="modal-role-edit.jsp"%>
+<%@include file="modal-role-delete-confirmation.jsp"%>
 </body>
 </html>

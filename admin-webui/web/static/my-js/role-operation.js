@@ -23,6 +23,21 @@ function generatePage(){
         //打开模态框
         $("#modal-role-update").modal("show");
     });
+
+    //給每个角色记录的删除按钮绑定点击响应函数
+    $(".btn-cross").click(function (){
+        //获取roleName
+        var roleName=$(this).parent().prev().text();
+
+        //创建role对象并传入数组
+        var roleList=[{
+            id: this.id,
+            name: roleName
+        }];
+
+        //调用专门的函数来打开确认删除的模态框
+        showModalForDeleteConfirmation(roleList);
+    });
 }
 
 //获取pageInfo函数
@@ -74,7 +89,7 @@ function fillTable(pageInfo){
         //Button td
         var checkBtn="<button type=\"button\" class=\"btn btn-success btn-xs\"><i class=\" glyphicon glyphicon-check\"></i></button>";
         var pencilBtn="<button id='"+roleId+"' type=\"button\" class=\"btn btn-primary btn-xs btn-pencil\"><i class=\" glyphicon glyphicon-pencil\"></i></button>";
-        var removeBtn="<button type=\"button\" class=\"btn btn-danger btn-xs\"><i class=\" glyphicon glyphicon-remove\"></i></button>";
+        var removeBtn="<button id='"+roleId+"' type=\"button\" class=\"btn btn-danger btn-xs btn-cross\"><i class=\" glyphicon glyphicon-remove\"></i></button>";
 
         var buttonTd="<td>"+checkBtn+" "+pencilBtn+" "+removeBtn+"</td>";
 
@@ -115,4 +130,26 @@ function pageSelectCallback(pageIndex, jQuery){
     //由于每一个页码按钮都是超链接，它默认跳转到上面的地址，但是那是不正确的，因为没有加host和contextPath。
     //我们要取消超链接的默认行为
     return false;
+}
+
+//在删除角色时，显示模态框用于确认删除行为
+function showModalForDeleteConfirmation(roleList){
+    //设置全局变量，为以后发送删除角色的Ajax作准备
+    window.roleIdList=[];
+
+    //清除模态框
+    $("#span-roleName").empty();
+
+    for(var i=0;i<roleList.length;i++){
+        var role=roleList[i];
+        var roleName=role.name;
+
+        $("#span-roleName").append(roleName+"<br/>");
+
+        //往roleidList传入要删除的roleId
+        window.roleIdList.push(role.id);
+    }
+
+    //打开模态框
+    $("#modal-role-delete-confirmation").modal("show");
 }
