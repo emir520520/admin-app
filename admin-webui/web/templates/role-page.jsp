@@ -126,6 +126,41 @@
             //关闭模态框
             $("#modal-role-delete-confirmation").modal("hide");
         });
+
+        //给checkbox-summary绑定点击响应函数
+        $("#checkbox-summary").click(function (){
+            //检查自身选择状态
+            var status=this.checked;
+
+            //修改所有其他的checkbox的状态
+            $(".checkbox-role").prop("checked", status);
+        });
+
+        //给批量删除按钮绑定点击响应函数
+        $("#btn-batch-delete").click(function (){
+            var roles=[];
+
+            //遍历当前选中的checkbox
+            $(".checkbox-role:checked").each(function (){
+               var roleId=$(this).parent().prev().text();
+
+               var roleName=$(this).parent().next().text();
+
+               roles.push({
+                   id: roleId,
+                   name: roleName
+               });
+            });
+
+            //判断role数组的长度
+            if(roles.length==0){
+                layer.msg("Please choose at least one record to delete");
+                return;
+            }
+
+            //调用专门的函数来打开确认删除的模态框
+            showModalForDeleteConfirmation(roles);
+        });
     });
 </script>
 <body>
@@ -149,7 +184,7 @@
                             </div>
                             <button id="btn-search" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> Search</button>
                         </form>
-                        <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> Delete</button>
+                        <button id="btn-batch-delete" type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> Delete</button>
                         <button id="btn-show-modal-add" type="button" class="btn btn-primary" style="float:right;"><i class="glyphicon glyphicon-plus"></i> Add</button>
                         <br>
                         <hr style="clear:both;">
@@ -158,7 +193,7 @@
                                 <thead>
                                 <tr>
                                     <th width="30">#</th>
-                                    <th width="30"><input type="checkbox"></th>
+                                    <th width="30"><input id="checkbox-summary" type="checkbox"></th>
                                     <th>Name</th>
                                     <th width="100">Action</th>
                                 </tr>

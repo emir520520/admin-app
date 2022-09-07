@@ -38,6 +38,18 @@ function generatePage(){
         //调用专门的函数来打开确认删除的模态框
         showModalForDeleteConfirmation(roleList);
     });
+
+    //给每个角色记录的checkbox绑定效果（如果所有的checkbox都选中了，将总的checkbox-summary也选中）
+    $('.checkbox-role').click(function (){
+        //获取全部checkbox的数量
+        var checkboxNum=$(".checkbox-role").length;
+
+        //获取当前已选中的checkbox的数量
+        var checkedNum=$(".checkbox-role:checked").length;
+
+        //设置checkbox-summary的值
+        $("#checkbox-summary").prop("checked", checkboxNum==checkedNum);
+    });
 }
 
 //获取pageInfo函数
@@ -83,7 +95,7 @@ function fillTable(pageInfo){
         var roleName=pageInfo[i].name;
 
         var numberTd="<td>"+roleId+"</td>";
-        var checkboxTd="<td><input type='checkbox'></td>";
+        var checkboxTd="<td><input class='checkbox-role' type='checkbox'></td>";
         var roleNameTd= "<td>"+roleName+"</td>";
 
         //Button td
